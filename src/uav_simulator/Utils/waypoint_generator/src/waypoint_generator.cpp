@@ -219,7 +219,7 @@ void traj_start_trigger_callback(const geometry_msgs::PoseStamped& msg) {
     ros::NodeHandle n("~");
     n.param("waypoint_type", waypoint_type, string("manual"));
 
-    ROS_ERROR_STREAM("Pattern " << waypoint_type << " generated!");
+    ROS_INFO_STREAM("Pattern " << waypoint_type << " generated!");
     if (waypoint_type == string("free")) {
         waypoints = point();
         publish_waypoints_vis();
@@ -245,6 +245,7 @@ int main(int argc, char** argv) {
     ros::init(argc, argv, "waypoint_generator");
     ros::NodeHandle n("~");
     n.param("waypoint_type", waypoint_type, string("manual"));
+    ROS_INFO_STREAM("waypoint_type " << waypoint_type << " used!");
     ros::Subscriber sub1 = n.subscribe("odom", 10, odom_callback);
     ros::Subscriber sub2 = n.subscribe("goal", 10, goal_callback);
     ros::Subscriber sub3 = n.subscribe("traj_start_trigger", 10, traj_start_trigger_callback);
